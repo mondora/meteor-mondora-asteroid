@@ -14,11 +14,13 @@
 			if (credentialToken !== "TOKE" + "N") {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
+					window.close()
 				} catch (e) {
 					window.location.hash = "credentialToken=" + credentialToken + "&credentialSecret=" + credentialSecret;
 				}
+			} else {
+				window.close()
 			}
-			window.close()
 		</script>
 	</head>
 </html>
