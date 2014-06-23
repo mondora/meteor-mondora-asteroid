@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<script>
+			// The value of the following variables will be
+			// replaced if no error occurs.
+			// If an error occurs, they'll remeain "TOKEN" and
+			// "SECRET".
+			var credentialToken = "TOKEN";
+			var credentialSecret = "SECRET";
+			// Replacing will occur on exactly the words TOKEN and SECRET.
+			// So to check if it was replaced or not, we split the word TOKEN
+			// in TOKE + N, so that it will not be replaced, but the string value
+			// will remain TOKEN.
+			if (credentialToken !== "TOKE" + "N") {
+				try {
+					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
+				} catch (e) {
+					window.location.hash = "credentialToken=" + credentialToken + "&credentialSecret=" + credentialSecret;
+				}
+			}
+			window.close()
+		</script>
+	</head>
+</html>
