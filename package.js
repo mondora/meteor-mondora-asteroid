@@ -3,6 +3,6 @@ Package.describe({
 });
 
 Package.on_use(function (api) {
-	api.use(["logging", "oauth"], "server");
+	api.use(["webapp", "logging", "oauth"], "server");
 	api.add_files("lib/asteroid.js", "server");
 });
