@@ -3,6 +3,6 @@
   "description": "Configure Meteor to be used with Asteroid",
   "homepage": "https://github.com/mondora/meteor-asteroid",
   "author": "Paolo Scanferla <paolo.scanferla@mondora.com>",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "git": "https://github.com/mondora/meteor-asteroid.git"
 }
