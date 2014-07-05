@@ -1,5 +1,5 @@
 {
-  "name": "asteroid",
+  "name": "mondora-asteroid",
   "description": "Configure Meteor to be used with Asteroid",
   "homepage": "https://github.com/mondora/meteor-asteroid",
   "author": "Paolo Scanferla <paolo.scanferla@mondora.com>",

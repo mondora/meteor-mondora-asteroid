@@ -3,24 +3,15 @@
 		<script>
 			// The value of the following variables will be
 			// replaced if no error occurs.
-			// If an error occurs, they'll remeain "TOKEN" and
-			// "SECRET".
 			var credentialToken = "TOKEN";
 			var credentialSecret = "SECRET";
 			var allowedOrigins = "ALLOWED_ORIGINS";
-			// Replacing will occur on exactly the words TOKEN and SECRET.
-			// So to check if it was replaced or not, we split the word TOKEN
-			// in TOKE + N, so that it will not be replaced, but the string value
-			// will remain TOKEN.
-			if (credentialToken !== "TOKE" + "N") {
+			if (credentialToken !== "TOKEN") {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
 					window.close()
 				} catch (e) {
 					window.addEventListener("message", function (e) {
-						var a = document.createElement("a");
-						a.href = e.origin;
-						var origin = a.hostname;
 						var message;
 						try {
 							message = JSON.parse(e.data);
@@ -29,7 +20,7 @@
 						}
 						if (
 							message.credentialToken === credentialToken &&
-							allowedOrigins.indexOf(origin) !== -1
+							allowedOrigins.indexOf(e.origin) !== -1
 						) {
 							var response = JSON.stringify({
 								credentialToken: credentialToken,
@@ -41,7 +32,26 @@
 					});
 				}
 			} else {
-				window.close()
+				try {
+					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
+					window.close()
+				} catch (e) {
+					window.addEventListener("message", function (e) {
+						var message;
+						try {
+							message = JSON.parse(e.data);
+						} catch (err) {
+							return;
+						}
+						if (allowedOrigins.indexOf(e.origin) !== -1) {
+							var response = JSON.stringify({
+								error: "ERROR"
+							});
+							e.source.postMessage(response, e.origin);
+							window.close();
+						}
+					});
+				}
 			}
 		</script>
 	</head>
