@@ -33,16 +33,10 @@
 				}
 			} else {
 				try {
-					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
+					window.opener.Package.oauth.OAuth._handleCredentialSecret;
 					window.close()
 				} catch (e) {
 					window.addEventListener("message", function (e) {
-						var message;
-						try {
-							message = JSON.parse(e.data);
-						} catch (err) {
-							return;
-						}
 						if (allowedOrigins.indexOf(e.origin) !== -1) {
 							var response = JSON.stringify({
 								error: "ERROR"
