@@ -7,9 +7,7 @@
 			var credentialSecret = "SECRET";
 			var allowedOrigin = "ALLOWED_ORIGIN";
 			// Write the two tokens in the hash fragment
-			// To simplify parsing, we'll adopt the
-			// convention TOKEN&SECRET 
-			window.location.hash = credentialToken + "&" + credentialSecret;
+			window.location.hash = "credentialToken=" + credentialToken + "&credentialSecret=" + credentialSecret;
 			if (credentialToken !== "TOKEN") {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
