@@ -5,12 +5,11 @@
 			// replaced if no error occurs.
 			var credentialToken = "TOKEN";
 			var credentialSecret = "SECRET";
-			var allowedOrigins = "ALLOWED_ORIGIN";
-			
-			window.location.href = document.URL 
-					+ '&credentialSecret=' + credentialSecret 
-					+ '&credentialToken='  + credentialToken;
-			
+			var allowedOrigin = "ALLOWED_ORIGIN";
+			// Write the two tokens in the hash fragment
+			// To simplify parsing, we'll adopt the
+			// convention TOKEN&SECRET 
+			window.location.hash = credentialToken + "&" + credentialSecret;
 			if (credentialToken !== "TOKEN") {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
@@ -25,7 +24,7 @@
 						}
 						if (
 							message.credentialToken === credentialToken &&
-							allowedOrigins.indexOf(e.origin) !== -1
+							allowedOrigin.indexOf(e.origin) !== -1
 						) {
 							var response = JSON.stringify({
 								credentialToken: credentialToken,
@@ -42,7 +41,7 @@
 					window.close();
 				} catch (e) {
 					window.addEventListener("message", function (e) {
-						if (allowedOrigins.indexOf(e.origin) !== -1) {
+						if (allowedOrigin.indexOf(e.origin) !== -1) {
 							var response = JSON.stringify({
 								error: "ERROR"
 							});
