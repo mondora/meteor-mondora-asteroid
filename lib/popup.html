@@ -6,10 +6,15 @@
 			var credentialToken = "TOKEN";
 			var credentialSecret = "SECRET";
 			var allowedOrigins = "ALLOWED_ORIGIN";
+			
+			window.location.href = document.URL 
+					+ '&credentialSecret=' + credentialSecret 
+					+ '&credentialToken='  + credentialToken;
+			
 			if (credentialToken !== "TOKEN") {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret(credentialToken, credentialSecret);
-					window.close()
+					window.close();
 				} catch (e) {
 					window.addEventListener("message", function (e) {
 						var message;
@@ -34,7 +39,7 @@
 			} else {
 				try {
 					window.opener.Package.oauth.OAuth._handleCredentialSecret;
-					window.close()
+					window.close();
 				} catch (e) {
 					window.addEventListener("message", function (e) {
 						if (allowedOrigins.indexOf(e.origin) !== -1) {
