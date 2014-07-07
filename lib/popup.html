@@ -22,7 +22,8 @@
 						}
 						if (
 							message.credentialToken === credentialToken &&
-							allowedOrigin.indexOf(e.origin) !== -1
+							(allowedOrigin.indexOf(e.origin) !== -1 ||
+							allowedOrigin === "*")
 						) {
 							var response = JSON.stringify({
 								credentialToken: credentialToken,
@@ -39,7 +40,7 @@
 					window.close();
 				} catch (e) {
 					window.addEventListener("message", function (e) {
-						if (allowedOrigin.indexOf(e.origin) !== -1) {
+						if (allowedOrigin.indexOf(e.origin) !== -1 || allowedOrigin === "*") {
 							var response = JSON.stringify({
 								error: "ERROR"
 							});
