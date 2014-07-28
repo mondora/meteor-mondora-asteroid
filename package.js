@@ -5,5 +5,5 @@ Package.describe({
 Package.on_use(function (api) {
 	api.use(["webapp", "logging", "oauth"], "server");
 	api.add_files("lib/asteroid.js", "server");
-	api.add_files("lib/popup.html", "server", {isAsset: true});
+	api.add_files("lib/asteroid_oauth_popup.html", "server", {isAsset: true});
 });
